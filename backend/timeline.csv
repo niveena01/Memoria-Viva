@@ -1,0 +1,51 @@
+name,born_year,death_year,image_url,target
+Miguel de la Luz,1900,1975,
+Rosa del Sol,1925,,/static/rosa.png
+Alvaro de la Luz,1950,2020,
+Isabel Alvarez,1980,,
+Mateo Morales,1885,1950,/static/mateo.png
+Carmen Silva,1912,1998,
+Ernesto de la Cruz,1940,2015,/static/ernesto.png
+Sofia Rivas,1965,,
+Diego Rivera,1886,1957,/static/diego.png
+Frida Kahlo,1907,1954,/static/frida.png
+Juan Rulfo,1917,1986,
+Elena Garro,1916,1998,/static/elena.png
+Octavio Paz,1914,1998,
+Rosario Castellanos,1925,1974,/static/rosario.png
+Emiliano Zapata,1879,1919,/static/zapata.png
+Pancho Villa,1878,1923,/static/villa.png
+Sor Juana Ines,1651,1695,/static/sorjuana.png
+Benito Juarez,1806,1872,
+Jose Maria Morelos,1765,1815,/static/morelos.png
+Miguel Hidalgo,1753,1811,
+Leona Vicario,1789,1842,/static/leona.png
+Agustin Lara,1897,1970,
+Maria Felix,1914,2002,/static/maria.png
+Pedro Infante,1917,1957,/static/pedro.png
+Jorge Negrete,1911,1953,
+Dolores del Rio,1904,1983,/static/dolores.png
+Cantinflas,1911,1993,
+Tin Tan,1915,1973,/static/tintan.png
+Jose Alfredo Jimenez,1926,1973,/static/josealfredo.png
+Chavela Vargas,1919,2012,
+Carlos Fuentes,1928,2012,/static/fuentes.png
+Gabriel Garcia Marquez,1927,2014,
+Julio Cortazar,1914,1984,/static/cortazar.png
+Jorge Luis Borges,1899,1986,
+Pablo Neruda,1904,1973,/static/neruda.png
+Gabriela Mistral,1889,1957,
+Cesar Vallejo,1892,1938,/static/vallejo.png
+Jose Marti,1853,1895,
+Ruben Dario,1867,1916,/static/rubendario.png
+Amado Nervo,1870,1919,
+Alfonso Reyes,1889,1959,/static/alfonsoreyes.png
+Xavier Villaurrutia,1903,1950,
+Salvador Novo,1904,1974,/static/salvadornovo.png
+Antonieta Rivas Mercado,1900,1931,
+Manuel Ponce,1882,1948,/static/ponce.png
+Silvestre Revueltas,1899,1940,
+Carlos Chavez,1899,1978,/static/chavez.png
+Luis Barragans,1902,1988,/static/barragan.png
+Tina Modotti,1896,1942,/static/modotti.png
+Manuel Alvarez Bravo,1902,2002,

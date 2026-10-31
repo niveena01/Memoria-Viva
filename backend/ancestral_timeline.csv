@@ -1,0 +1,13 @@
+year,season,documents_archived,letters_exchanged,anomaly_score_log,target
+1920,Spring,12,45,0.2,Peaceful
+1921,Autumn,8,30,0.5,Turbulent
+1922,Summer,24,60,0.1,Peaceful
+1925,Winter,5,10,0.8,Turbulent
+1930,Spring,19,52,0.3,Peaceful
+1935,Autumn,15,40,0.4,Peaceful
+1939,Winter,3,8,0.9,Turbulent
+1945,Summer,30,95,0.1,Peaceful
+1950,Spring,22,65,0.2,Peaceful
+1955,Autumn,14,35,0.6,Turbulent
+1960,Summer,28,80,0.2,Peaceful
+1965,Winter,7,18,0.7,Turbulent
