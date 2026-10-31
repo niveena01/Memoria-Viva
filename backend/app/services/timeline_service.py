@@ -14,13 +14,23 @@ class TimelineService:
             if "target" not in df.columns:
                 raise ValueError("CSV dataset must contain a 'target' column for classification.")
 
+            # Filter out any rows where target is missing or blank
+            df = df.dropna(subset=["target"])
+            df = df[df["target"].astype(str).str.strip() != ""]
+
+            if df.empty:
+                raise ValueError("CSV dataset contains no valid rows with non-empty 'target' values.")
+
             X = df.drop(columns=["target"])
-            y = df["target"]
+            y = df["target"].astype(str)
 
             # Convert any string / object / category columns to standard numeric categories or integers 
             # so TabPFN doesn't crash on string dtypes
             for col in X.select_dtypes(include=["object", "string", "category"]).columns:
-                X[col] = X[col].astype(str).astype("category").cat.codes
+                X[col] = X[col].fillna("Unknown").astype(str).astype("category").cat.codes
+
+            # Fill remaining numeric NaNs
+            X = X.fillna(0)
 
             # Fit TabPFN in-context model on historical data
             self.classifier.fit(X, y)

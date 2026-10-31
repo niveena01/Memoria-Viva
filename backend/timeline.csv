@@ -1,51 +1,60 @@
-name,born_year,death_year,image_url,target
-Miguel de la Luz,1900,1975,
-Rosa del Sol,1925,,/static/rosa.png
-Alvaro de la Luz,1950,2020,
-Isabel Alvarez,1980,,
-Mateo Morales,1885,1950,/static/mateo.png
-Carmen Silva,1912,1998,
-Ernesto de la Cruz,1940,2015,/static/ernesto.png
-Sofia Rivas,1965,,
-Diego Rivera,1886,1957,/static/diego.png
-Frida Kahlo,1907,1954,/static/frida.png
-Juan Rulfo,1917,1986,
-Elena Garro,1916,1998,/static/elena.png
-Octavio Paz,1914,1998,
-Rosario Castellanos,1925,1974,/static/rosario.png
-Emiliano Zapata,1879,1919,/static/zapata.png
-Pancho Villa,1878,1923,/static/villa.png
-Sor Juana Ines,1651,1695,/static/sorjuana.png
-Benito Juarez,1806,1872,
-Jose Maria Morelos,1765,1815,/static/morelos.png
-Miguel Hidalgo,1753,1811,
-Leona Vicario,1789,1842,/static/leona.png
-Agustin Lara,1897,1970,
-Maria Felix,1914,2002,/static/maria.png
-Pedro Infante,1917,1957,/static/pedro.png
-Jorge Negrete,1911,1953,
-Dolores del Rio,1904,1983,/static/dolores.png
-Cantinflas,1911,1993,
-Tin Tan,1915,1973,/static/tintan.png
-Jose Alfredo Jimenez,1926,1973,/static/josealfredo.png
-Chavela Vargas,1919,2012,
-Carlos Fuentes,1928,2012,/static/fuentes.png
-Gabriel Garcia Marquez,1927,2014,
-Julio Cortazar,1914,1984,/static/cortazar.png
-Jorge Luis Borges,1899,1986,
-Pablo Neruda,1904,1973,/static/neruda.png
-Gabriela Mistral,1889,1957,
-Cesar Vallejo,1892,1938,/static/vallejo.png
-Jose Marti,1853,1895,
-Ruben Dario,1867,1916,/static/rubendario.png
-Amado Nervo,1870,1919,
-Alfonso Reyes,1889,1959,/static/alfonsoreyes.png
-Xavier Villaurrutia,1903,1950,
-Salvador Novo,1904,1974,/static/salvadornovo.png
-Antonieta Rivas Mercado,1900,1931,
-Manuel Ponce,1882,1948,/static/ponce.png
-Silvestre Revueltas,1899,1940,
-Carlos Chavez,1899,1978,/static/chavez.png
-Luis Barragans,1902,1988,/static/barragan.png
-Tina Modotti,1896,1942,/static/modotti.png
-Manuel Alvarez Bravo,1902,2002,
+name,born_year,death_year,image_url,relationship,generation,target
+Abuela Rosa del Sol,1895,1975,/no_image.png,Grandmother,1,Revered
+Abuelo Miguel de la Luz,1890,1968,/no_image.png,Grandfather,1,Revered
+Mateo Morales,1885,1950,/no_image.png,Great-Grandfather,1,Historic
+Elena Morales,1888,1955,/no_image.png,Great-Grandmother,1,Sacred
+Diego Rivera,1886,1957,/no_image.png,Ancestor,1,Historic
+Frida Kahlo,1907,1954,/no_image.png,Ancestor,1,Historic
+Sor Juana Ines,1651,1695,/no_image.png,Ancestor,1,Sacred
+Benito Juarez,1806,1872,/no_image.png,Ancestor,1,Peaceful
+Miguel Hidalgo,1753,1811,/no_image.png,Ancestor,1,Historic
+Carmen Silva,1920,1998,/no_image.png,Mother,2,Harmonious
+Alvaro de la Luz,1922,1995,/no_image.png,Father,2,Peaceful
+Rosa Maria de la Luz,1925,2005,/no_image.png,Daughter,2,Peaceful
+Ernesto de la Cruz,1925,2015,/no_image.png,Father,2,Turbulent
+Rosario Castellanos,1925,1974,/no_image.png,Mother,2,Historic
+Juan Rulfo,1917,1986,/no_image.png,Uncle,2,Peaceful
+Elena Garro,1916,1998,/no_image.png,Aunt,2,Historic
+Maria Felix,1914,2002,/no_image.png,Mother,2,Revered
+Pedro Infante,1917,1957,/no_image.png,Father,2,Revered
+Dolores del Rio,1904,1983,/no_image.png,Aunt,2,Peaceful
+Sofia Rivas,1955,,/no_image.png,Daughter,3,Harmonious
+Lucia Morales,1958,,/no_image.png,Daughter,3,Peaceful
+Isabel Alvarez,1960,,/no_image.png,Daughter,3,Harmonious
+Carlos de la Luz,1962,,/no_image.png,Son,3,Peaceful
+Dolores Alvarez,1965,,/no_image.png,Daughter,3,Harmonious
+Valentina Cruz,1985,,/no_image.png,Granddaughter,4,Harmonious
+Camila Rivas,1988,,/no_image.png,Granddaughter,4,Peaceful
+Ximena Morales,1992,,/no_image.png,Granddaughter,4,Harmonious
+Mateo Cruz,1995,,/no_image.png,Grandson,4,Peaceful
+Natalia Alvarez,1998,,/no_image.png,Granddaughter,4,Harmonious
+Emiliano Zapata,1879,1919,/no_image.png,Ancestor,1,Turbulent
+Pancho Villa,1878,1923,/no_image.png,Ancestor,1,Turbulent
+Jose Maria Morelos,1765,1815,/no_image.png,Ancestor,1,Historic
+Leona Vicario,1789,1842,/no_image.png,Ancestor,1,Sacred
+Agustin Lara,1897,1970,/no_image.png,Uncle,2,Harmonious
+Jorge Negrete,1911,1953,/no_image.png,Uncle,2,Revered
+Cantinflas,1911,1993,/no_image.png,Uncle,2,Harmonious
+Tin Tan,1915,1973,/no_image.png,Uncle,2,Harmonious
+Jose Alfredo Jimenez,1926,1973,/no_image.png,Uncle,2,Revered
+Chavela Vargas,1919,2012,/no_image.png,Aunt,2,Revered
+Carlos Fuentes,1928,2012,/no_image.png,Uncle,2,Peaceful
+Gabriel Garcia Marquez,1927,2014,/no_image.png,Uncle,2,Peaceful
+Julio Cortazar,1914,1984,/no_image.png,Uncle,2,Peaceful
+Jorge Luis Borges,1899,1986,/no_image.png,Ancestor,1,Historic
+Pablo Neruda,1904,1973,/no_image.png,Ancestor,1,Revered
+Gabriela Mistral,1889,1957,/no_image.png,Ancestor,1,Sacred
+Cesar Vallejo,1892,1938,/no_image.png,Ancestor,1,Historic
+Jose Marti,1853,1895,/no_image.png,Ancestor,1,Sacred
+Ruben Dario,1867,1916,/no_image.png,Ancestor,1,Historic
+Amado Nervo,1870,1919,/no_image.png,Ancestor,1,Peaceful
+Alfonso Reyes,1889,1959,/no_image.png,Ancestor,1,Historic
+Xavier Villaurrutia,1903,1950,/no_image.png,Uncle,2,Peaceful
+Salvador Novo,1904,1974,/no_image.png,Uncle,2,Peaceful
+Antonieta Rivas Mercado,1900,1931,/no_image.png,Mother,2,Sacred
+Manuel Ponce,1882,1948,/no_image.png,Ancestor,1,Peaceful
+Silvestre Revueltas,1899,1940,/no_image.png,Ancestor,1,Historic
+Carlos Chavez,1899,1978,/no_image.png,Ancestor,1,Peaceful
+Luis Barragan,1902,1988,/no_image.png,Ancestor,1,Peaceful
+Tina Modotti,1896,1942,/no_image.png,Ancestor,1,Sacred
+Manuel Alvarez Bravo,1902,2002,/no_image.png,Ancestor,1,Historic

@@ -41,19 +41,90 @@ _FAMILY_FALLBACKS = [
 ]
 
 # ──────────────────────────────────────────────
-# In-memory family store (pre-seeded sample)
+# In-memory family store (hierarchical ancestors, daughters, granddaughters)
 # ──────────────────────────────────────────────
 DEFAULT_FAMILY: List[dict] = [
-    {"name": "Abuela Rosa",      "born_year": 1900, "death_year": 1975, "image_url": "/no_image.png", "relationship": "Grandmother", "generation": 1},
-    {"name": "Abuelo Miguel",    "born_year": 1898, "death_year": 1972, "image_url": "/no_image.png", "relationship": "Grandfather", "generation": 1},
-    {"name": "Carmen Silva",     "born_year": 1928, "death_year": 2005, "image_url": "/no_image.png", "relationship": "Mother",      "generation": 2},
-    {"name": "Ernesto de la Cruz","born_year": 1925,"death_year": 2015, "image_url": "/no_image.png", "relationship": "Father",      "generation": 2},
-    {"name": "Sofia Rivas",      "born_year": 1955, "death_year": None, "image_url": "/no_image.png", "relationship": "Daughter",    "generation": 3},
-    {"name": "Lucia Morales",    "born_year": 1958, "death_year": None, "image_url": "/no_image.png", "relationship": "Daughter",    "generation": 3},
-    {"name": "Valentina Cruz",   "born_year": 1985, "death_year": None, "image_url": "/no_image.png", "relationship": "Granddaughter","generation": 4},
+    {"name": "Abuela Rosa del Sol", "born_year": 1895, "death_year": 1975, "image_url": "/no_image.png", "relationship": "Grandmother", "generation": 1},
+    {"name": "Abuelo Miguel de la Luz", "born_year": 1890, "death_year": 1968, "image_url": "/no_image.png", "relationship": "Grandfather", "generation": 1},
+    {"name": "Mateo Morales", "born_year": 1885, "death_year": 1950, "image_url": "/no_image.png", "relationship": "Great-Grandfather", "generation": 1},
+    {"name": "Elena Morales", "born_year": 1888, "death_year": 1955, "image_url": "/no_image.png", "relationship": "Great-Grandmother", "generation": 1},
+    {"name": "Carmen Silva", "born_year": 1920, "death_year": 1998, "image_url": "/no_image.png", "relationship": "Mother", "generation": 2},
+    {"name": "Alvaro de la Luz", "born_year": 1922, "death_year": 1995, "image_url": "/no_image.png", "relationship": "Father", "generation": 2},
+    {"name": "Rosa Maria de la Luz", "born_year": 1925, "death_year": 2005, "image_url": "/no_image.png", "relationship": "Daughter", "generation": 2},
+    {"name": "Sofia Rivas", "born_year": 1955, "death_year": None, "image_url": "/no_image.png", "relationship": "Daughter", "generation": 3},
+    {"name": "Lucia Morales", "born_year": 1958, "death_year": None, "image_url": "/no_image.png", "relationship": "Daughter", "generation": 3},
+    {"name": "Isabel Alvarez", "born_year": 1960, "death_year": None, "image_url": "/no_image.png", "relationship": "Daughter", "generation": 3},
+    {"name": "Valentina Cruz", "born_year": 1985, "death_year": None, "image_url": "/no_image.png", "relationship": "Granddaughter", "generation": 4},
+    {"name": "Camila Rivas", "born_year": 1988, "death_year": None, "image_url": "/no_image.png", "relationship": "Granddaughter", "generation": 4},
+    {"name": "Ximena Morales", "born_year": 1992, "death_year": None, "image_url": "/no_image.png", "relationship": "Granddaughter", "generation": 4},
 ]
 
-CURRENT_FAMILY_STORE: List[dict] = list(DEFAULT_FAMILY)
+def _parse_family_csv_rows(reader: csv.DictReader) -> List[dict]:
+    items: List[dict] = []
+    for row in reader:
+        name = (row.get("name") or "").strip()
+        if not name:
+            continue
+
+        def _int(val: str, default: int = 0) -> int:
+            try:
+                return int(float(str(val).strip()))
+            except Exception:
+                return default
+
+        def _opt_int(val: Optional[str]) -> Optional[int]:
+            if not val or not str(val).strip():
+                return None
+            try:
+                return int(float(str(val).strip()))
+            except Exception:
+                return None
+
+        img = (row.get("image_url") or row.get("image") or "").strip()
+        if not img or img.lower() in ("nan", "none", ""):
+            img = "/no_image.png"
+
+        relationship = (row.get("relationship") or row.get("role") or "").strip() or None
+        generation = _opt_int(row.get("generation") or row.get("gen"))
+
+        if generation is None and relationship:
+            rl = relationship.lower()
+            if any(x in rl for x in ["great-grand", "great grand"]):
+                generation = 1
+            elif any(x in rl for x in ["grandfather", "grandmother", "grandparent", "ancestor", "elder", "forefather"]):
+                generation = 1
+            elif any(x in rl for x in ["mother", "father", "parent", "uncle", "aunt"]):
+                generation = 2
+            elif any(x in rl for x in ["son", "daughter", "child", "sibling", "brother", "sister"]):
+                generation = 3
+            elif any(x in rl for x in ["grandson", "granddaughter", "grandchild"]):
+                generation = 4
+
+        items.append({
+            "name": name,
+            "born_year": _int(row.get("born_year") or row.get("born") or "0"),
+            "death_year": _opt_int(row.get("death_year") or row.get("died")),
+            "image_url": img,
+            "relationship": relationship,
+            "generation": generation or 1,
+        })
+    return items
+
+def _load_initial_family() -> List[dict]:
+    from pathlib import Path
+    csv_path = Path(__file__).resolve().parent.parent.parent / "timeline.csv"
+    if csv_path.exists():
+        try:
+            with open(csv_path, mode="r", encoding="utf-8", errors="replace") as f:
+                reader = csv.DictReader(f)
+                loaded = _parse_family_csv_rows(reader)
+                if loaded:
+                    return loaded
+        except Exception as e:
+            logger.warning("Could not auto-load timeline.csv: %s", e)
+    return list(DEFAULT_FAMILY)
+
+CURRENT_FAMILY_STORE: List[dict] = _load_initial_family()
 
 
 # ──────────────────────────────────────────────
@@ -184,62 +255,9 @@ async def upload_family_tree(file: UploadFile = File(...)):
     global CURRENT_FAMILY_STORE
     content = await file.read()
     reader = csv.DictReader(io.StringIO(content.decode("utf-8", errors="replace")))
-
-    new_members: List[dict] = []
-    for row in reader:
-        name = (row.get("name") or "").strip()
-        if not name:
-            continue
-
-        def _int(val: str, default: int = 0) -> int:
-            try:
-                return int(float(val.strip()))
-            except Exception:
-                return default
-
-        def _opt_int(val: Optional[str]) -> Optional[int]:
-            if not val or not val.strip():
-                return None
-            try:
-                return int(float(val.strip()))
-            except Exception:
-                return None
-
-        img = (row.get("image_url") or row.get("image") or "").strip()
-        if not img or img.lower() in ("nan", "none", ""):
-            img = "/no_image.png"
-
-        relationship = (row.get("relationship") or row.get("role") or "").strip() or None
-
-        gen_raw = row.get("generation") or row.get("gen") or ""
-        generation = _opt_int(gen_raw)
-
-        # Auto-assign generation from relationship if missing
-        if generation is None and relationship:
-            rl = relationship.lower()
-            if any(x in rl for x in ["great-grand", "great grand"]):
-                generation = 1
-            elif any(x in rl for x in ["grandfather", "grandmother", "grandparent"]):
-                generation = 1
-            elif any(x in rl for x in ["mother", "father", "parent", "uncle", "aunt"]):
-                generation = 2
-            elif any(x in rl for x in ["son", "daughter", "child", "sibling", "brother", "sister"]):
-                generation = 3
-            elif any(x in rl for x in ["grandson", "granddaughter", "grandchild"]):
-                generation = 4
-
-        new_members.append({
-            "name": name,
-            "born_year": _int(row.get("born_year") or row.get("born") or "0"),
-            "death_year": _opt_int(row.get("death_year") or row.get("died")),
-            "image_url": img,
-            "relationship": relationship,
-            "generation": generation,
-        })
-
+    new_members = _parse_family_csv_rows(reader)
     if new_members:
         CURRENT_FAMILY_STORE = new_members
-
     return FamilyTreeResponse(family=[FamilyMember(**m) for m in CURRENT_FAMILY_STORE])
 
 
